@@ -9,5 +9,6 @@
                             http://www.springframework.org/schema/context/spring-context.xsd
 ">
 
-    <bean id="helloWorld" class="com.zhengxt.HelloWorld" />
+    <context:component-scan base-package="com.zhengxt"/>
+    <import resource="classpath:spring-mybatis.xml"/>
 </beans>
