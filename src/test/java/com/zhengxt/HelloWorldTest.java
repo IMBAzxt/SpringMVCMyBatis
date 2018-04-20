@@ -6,6 +6,7 @@
 package com.zhengxt;
 
 import com.zhengxt.dao.UserMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,6 @@ public class HelloWorldTest {
 
     @Test
     public void testMybatis() {
-        userMapper.getUser("1");
+        Assert.assertEquals("zhang", userMapper.getUser(1).getUsername());
     }
 }

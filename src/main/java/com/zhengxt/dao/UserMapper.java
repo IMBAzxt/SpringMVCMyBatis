@@ -7,6 +7,7 @@ package com.zhengxt.dao;
 
 import com.zhengxt.Users;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -16,5 +17,16 @@ import org.apache.ibatis.annotations.Select;
 public interface UserMapper {
 
     @Select("SELECT * FROM users WHERE id = #{userId}")
-    Users getUser(@Param("userId") String userId);
+//    @ResultMap("userMap")
+    Users getUser(@Param("userId") int userId);
+
+    Users findUserById(int id);
+
+    void addUser(Users users);
+
+    void updateUser(Users users);
+
+    void deleteUser(int id);
+
+    Users[] findAllUsers();
 }

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private Integer id;
     private String username;
     private String password;
     private String passwordSalt;
@@ -21,15 +21,15 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Long id) {
+    public Users(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

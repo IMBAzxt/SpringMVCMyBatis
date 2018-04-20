@@ -51,16 +51,11 @@
         <property name="testConnectionOnCheckout"  value="false" />        
     </bean> 
 
-    <!--    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.zhengxt.dao.UserMapper" />
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-    </bean>-->
-
     <!-- ÅäÖÃmybatisSqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <!--<property name="configLocation" value="classpath:mybatis/mybatis.xml"/>-->
-        <!--<property name="mapperLocations" value="classpath*:com/itclj/magpie/**/*Mapper.xml"/>-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--<property name="mapperLocations" value="classpath*:*Mapper.xml"/>-->
     </bean>
 
     <!-- ÅäÖÃSqlSessionTemplate -->
