@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.zhengxt.dao;
+package com.zhengxt.mapper;
 
-import com.zhengxt.Users;
+import com.zhengxt.entity.Users;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;

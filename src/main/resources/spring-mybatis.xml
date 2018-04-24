@@ -48,8 +48,8 @@
         <!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的
         时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable
         等方法来提升连接测试的性能。Default: false -->
-        <property name="testConnectionOnCheckout"  value="false" />        
-    </bean> 
+        <property name="testConnectionOnCheckout"  value="false" />
+    </bean>
 
     <!-- 配置mybatisSqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -61,14 +61,14 @@
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
-    
+
     <!-- 配置mybatis mapper接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.zhengxt.dao"/>
+        <property name="basePackage" value="com.zhengxt.mapper"/>
         <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
     </bean>
 
     <!-- 使用annotation注解方式配置事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/> 
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

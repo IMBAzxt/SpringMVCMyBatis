@@ -3,7 +3,7 @@
 
 <configuration>
     <typeAliases>
-        <typeAlias type="com.zhengxt.Users" alias="Users" />
+        <typeAlias type="com.zhengxt.entity.Users" alias="Users" />
     </typeAliases>
     <mappers>
         <mapper resource="mapper/usersMapper.xml" />

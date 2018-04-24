@@ -5,7 +5,8 @@
  */
 package com.zhengxt;
 
-import com.zhengxt.dao.UserMapper;
+import com.zhengxt.entity.Users;
+import com.zhengxt.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
