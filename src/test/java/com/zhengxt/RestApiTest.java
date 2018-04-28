@@ -5,6 +5,11 @@
  */
 package com.zhengxt;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhengxt.dto.Response;
+import com.zhengxt.entity.Users;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,15 +49,22 @@ public class RestApiTest {
     @Test
     public void testGet() throws Exception {
 
-        String responseString = mockMvc.perform(
-                get("/api/testGet") //请求地址
+        String result = mockMvc.perform(
+                get("/api/testGet/1001") //请求地址
+                 .header("Accept-Encoding", "UTF-8") //添加头部信息
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE) //返回的数据格式
-        //                .param("id", "1")  //添加参数(可以添加多个)
+                .param("username", "zhangsan") //添加参数(可以添加多个)
         )
                 .andExpect(status().isOk()) //判断返回是否成功
                 .andDo(print()) //打印出请求信息
                 .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
-        System.out.println("-----返回的json = " + responseString);
+        // jackson字符串转对象
+        ObjectMapper mapper = new ObjectMapper();
 
+        Response<Users> resp = mapper.readValue(result, new TypeReference<Response<Users>>() {
+        });
+        Users users = resp.getData();
+        Assert.assertEquals("1001", String.valueOf(users.getId()));
+        Assert.assertEquals("zhangsan", users.getUsername());
     }
 }

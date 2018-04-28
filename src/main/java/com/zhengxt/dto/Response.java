@@ -8,19 +8,20 @@ package com.zhengxt.dto;
 /**
  *
  * @author ThinkPad
+ * @param <T>
  */
-public class Response {
+public class Response<T> {
     private static final String OK = "OK";
     private static final String ERROR = "ERROR";
     private Meta meta;
-    private Object data;
+    private T data;
 
     public Response success() {
         this.meta = new Meta(true, OK);
         return this;
     }
 
-    public Response success(Object data) {
+    public Response success(T data) {
         this.meta = new Meta(true, OK);
         this.data = data;
         return this;
@@ -44,11 +45,11 @@ public class Response {
         this.meta = meta;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 

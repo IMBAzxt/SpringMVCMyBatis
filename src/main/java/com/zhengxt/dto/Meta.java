@@ -13,6 +13,10 @@ public class Meta {
     private boolean success;
     private String message;
 
+    public Meta() {
+
+    }
+
     public Meta(boolean success) {
         this.success = success;
     }

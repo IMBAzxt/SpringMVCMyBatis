@@ -79,7 +79,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.zhengxt.templet.dao.Users[ id=" + id + " ]";
+        return "com.zhengxt.templet.dao.Users[ id=" + id + " ] [username=]" + username;
     }
 
 }
