@@ -48,8 +48,8 @@ public class ApiREST {
         return new Response<Users>().success(users);
     }
 
-    @DeleteMapping(value = "testDelete", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public Response testDelete() {
-        return new Response<String>().success("test rest api,method:delete");
+    @DeleteMapping(value = "testDelete/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public Response testDelete(@PathVariable int id) {
+        return new Response<Integer>().success(id);
     }
 }

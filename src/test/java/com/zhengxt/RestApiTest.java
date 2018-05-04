@@ -40,6 +40,8 @@ public class RestApiTest {
     WebApplicationContext wac;
 
     MockMvc mockMvc;
+    int id = 1001;
+    String username = "张三";
 
     @Before
     public void setup() {
@@ -50,13 +52,15 @@ public class RestApiTest {
     public void testGet() throws Exception {
 
         String result = mockMvc.perform(
-                get("/api/testGet/1001") //请求地址
+                get("/api/testGet/" + id) //请求地址
                  .header("Accept-Encoding", "UTF-8") //添加头部信息
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE) //返回的数据格式
-                .param("username", "zhangsan") //添加参数(可以添加多个)
+                .param("username", username) //添加参数(可以添加多个)
         )
-                .andExpect(status().isOk()) //判断返回是否成功
                 .andDo(print()) //打印出请求信息
+                .andExpect(status().isOk()) //判断返回是否成功
+                .andExpect(jsonPath("$.data.id").value(id))
+                .andExpect(jsonPath("$.data.username").value(username))
                 .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
         // jackson字符串转对象
         ObjectMapper mapper = new ObjectMapper();
@@ -64,7 +68,64 @@ public class RestApiTest {
         Response<Users> resp = mapper.readValue(result, new TypeReference<Response<Users>>() {
         });
         Users users = resp.getData();
-        Assert.assertEquals("1001", String.valueOf(users.getId()));
-        Assert.assertEquals("zhangsan", users.getUsername());
+        Assert.assertEquals(String.valueOf(id), String.valueOf(users.getId()));
+        Assert.assertEquals(username, users.getUsername());
+    }
+
+    @Test
+    public void testPost() throws Exception {
+        Users users = new Users();
+        users.setId(id);
+        users.setUsername(username);
+        mockMvc.perform(
+                post("/api/testPost")
+                .flashAttr("users", users) //@ModelAttribute("users") Users users，这种情况需要使用flashAttr来进行传值
+                //                .content(mapper.writeValueAsString(users))
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id").value(id))
+                .andExpect(jsonPath("$.data.username").value(username))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+    }
+
+    @Test
+    public void testPut() throws Exception {
+        Users users = new Users();
+        users.setId(id);
+        users.setUsername(username);
+        mockMvc.perform(
+                put("/api/testPut")
+                .flashAttr("users", users) //@ModelAttribute("users") Users users，这种情况需要使用flashAttr来进行传值
+                //                .content(mapper.writeValueAsString(users))
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id").value(id))
+                .andExpect(jsonPath("$.data.username").value(username))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        mockMvc.perform(
+                delete("/api/testDelete/" + id)
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").value(id))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
     }
 }
