@@ -7,6 +7,7 @@ package com.zhengxt.controller;
 
 import com.zhengxt.dto.Response;
 import com.zhengxt.entity.Users;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,12 +41,12 @@ public class ApiREST {
     }
 
     @PutMapping(value = "testPut", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public Response testPut(@ModelAttribute("users") Users users) {
+    public Response testPut(@RequestBody Users users) {
         return new Response<Users>().success(users);
     }
 
     @PostMapping(value = "testPost", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public Response testPost(@ModelAttribute("users") Users users) {
+    public Response testPost(@RequestBody Users users, HttpServletRequest request) {
         return new Response<Users>().success(users);
     }
 

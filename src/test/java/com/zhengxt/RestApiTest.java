@@ -77,10 +77,11 @@ public class RestApiTest {
         Users users = new Users();
         users.setId(id);
         users.setUsername(username);
+        ObjectMapper mapper = new ObjectMapper();
         mockMvc.perform(
                 post("/api/testPost")
-                .flashAttr("users", users) //@ModelAttribute("users") Users users，这种情况需要使用flashAttr来进行传值
-                //                .content(mapper.writeValueAsString(users))
+                //                                .flashAttr("users", users) //@ModelAttribute("users") Users users，这种情况需要使用flashAttr来进行传值
+                .content(mapper.writeValueAsString(users))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
         )
                 .andDo(print())
@@ -98,10 +99,10 @@ public class RestApiTest {
         Users users = new Users();
         users.setId(id);
         users.setUsername(username);
+        ObjectMapper mapper = new ObjectMapper();
         mockMvc.perform(
                 put("/api/testPut")
-                .flashAttr("users", users) //@ModelAttribute("users") Users users，这种情况需要使用flashAttr来进行传值
-                //                .content(mapper.writeValueAsString(users))
+                .content(mapper.writeValueAsString(users))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
         )
                 .andDo(print())
