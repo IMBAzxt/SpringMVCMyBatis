@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author ThinkPad
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath*:spring.xml")
+@ContextConfiguration(locations = "classpath:spring.xml")
 public class UsersTest {
 
     @Autowired

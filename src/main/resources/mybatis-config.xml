@@ -5,7 +5,4 @@
     <typeAliases>
         <typeAlias type="com.zhengxt.entity.Users" alias="Users" />
     </typeAliases>
-    <mappers>
-        <mapper resource="mapper/usersMapper.xml" />
-    </mappers>
 </configuration>
