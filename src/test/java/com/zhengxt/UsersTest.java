@@ -7,6 +7,7 @@ package com.zhengxt;
 
 import com.zhengxt.entity.Users;
 import com.zhengxt.mapper.UserMapper;
+import com.zhengxt.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,5 +61,13 @@ public class UsersTest {
     public void testDeleteUser() {
         userMapper.deleteUser(userId);
         Assert.assertEquals(null, userMapper.findUserById(userId));
+    }
+
+    @Autowired
+    UserService userService;
+
+    @Test
+    public void testCache() {
+        userService.findUsersById(1);
     }
 }

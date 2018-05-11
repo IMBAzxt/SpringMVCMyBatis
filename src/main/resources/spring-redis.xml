@@ -23,7 +23,7 @@
     </bean>
 
     <!-- 连接池配置，类似数据库连接池 -->
-    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
         <property name="hostName" value="${redis.host}"></property>
         <property name="port" value="${redis.port}"></property>
         <property name="password" value="${redis.pass}"></property>
@@ -32,22 +32,7 @@
     <!-- 使用中间类解决RedisCache.jedisConnectionFactory的静态注入，从而使MyBatis实现第三方缓存 -->
     <bean id="redisCacheTransfer" class="com.zhengxt.dao.cache.RedisCacheTransfer">
         <property name="jedisConnectionFactory" ref="jedisConnectionFactory" />
-    </bean> 
-
-    <!-- 调用连接池工厂配置 -->
-    <bean id="redisTemplate" class=" org.springframework.data.redis.core.RedisTemplate">
-        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
-
-        <!--  如果不配置Serializer，那么存储的时候智能使用String，如果用User类型存储，那么会提示错误User can't cast
-        to String！！！   -->
-        <property name="keySerializer">
-            <bean
-                class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-        </property>
-        <property name="valueSerializer">
-            <bean
-                class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
-        </property>
     </bean>
+
 
 </beans>
