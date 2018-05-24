@@ -5,12 +5,10 @@
  */
 package com.zhengxt.service;
 
-import com.zhengxt.dao.cache.RedisDAO;
 import com.zhengxt.entity.Users;
 import com.zhengxt.mapper.UserMapper;
-import org.apache.ibatis.annotations.CacheNamespace;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,11 +18,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     UserMapper userMapper;
 
     public Users findUsersById(int id) {
-        return userMapper.findUserById(id);
+        Users users = userMapper.findUserById(id);
+        logger.info(users.toString());
+        return users;
     }
 
     public void addUsers(Users users) {

@@ -6,7 +6,6 @@
 package com.zhengxt.service;
 
 import com.zhengxt.entity.Users;
-import org.springframework.cache.annotation.Cacheable;
 
 /**
  *
