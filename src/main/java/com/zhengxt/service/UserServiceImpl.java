@@ -5,6 +5,7 @@
  */
 package com.zhengxt.service;
 
+import com.zhengxt.dao.cache.GetCache;
 import com.zhengxt.entity.Users;
 import com.zhengxt.mapper.UserMapper;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @GetCache(key = "id")
     public Users findUsersById(int id) {
         Users users = userMapper.findUserById(id);
         logger.info(users.toString());
